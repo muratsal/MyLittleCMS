@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyLittleCMS.Core
+namespace MyLittleCMS.Core.Domain.Entities
 {
-    public class Class1
+    public partial class Setting : Entity
     {
+       
     }
 }
