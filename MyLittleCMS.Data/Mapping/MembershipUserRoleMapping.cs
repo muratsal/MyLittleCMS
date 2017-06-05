@@ -15,6 +15,7 @@ namespace MyLittleCMS.Data.Mapping
             HasKey(x => x.Id);
             Property(x => x.Id).IsRequired();
             Property(x => x.RoleName).IsRequired().HasMaxLength(70);
+            Property(x => x.IsSytemRole).IsRequired();
         }
     }
 }

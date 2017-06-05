@@ -16,8 +16,9 @@ namespace MyLittleCMS.Core.Domain.Entities
         public string UserName { get; set; }
         public string PasswordHashed { get; set; }
         public string Email { get; set; }
-        public int MembershipUserRoleId { get; set; }
+        public int  MembershipUserRoleId { get; set; }
         public bool IsApproved { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual MembershipUserRole MembershipUserRole { get; set; }
         public virtual ICollection<Post> UserPosts { get; set; }

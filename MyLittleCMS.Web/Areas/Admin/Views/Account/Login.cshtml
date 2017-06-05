@@ -1,0 +1,141 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--IE Compatibility modes-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Mobile first-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Login Page</title>
+
+    <meta name="description" content="login page">
+    <meta name="author" content="">
+
+    <meta name="msapplication-TileColor" content="#5bc0de" />
+    <meta name="msapplication-TileImage" content="assets/img/metis-tile.png" />
+
+    <!-- Bootstrap -->
+    <link href="~/Content/asset/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link href="~/Content/asset/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- Metis core stylesheet -->
+    <link href="~/Content/asset/css/main.css" rel="stylesheet" />
+
+    <!-- metisMenu stylesheet -->
+    <link href="~/Content/asset/lib/metismenu/metisMenu.css" rel="stylesheet" />
+
+
+    <!-- onoffcanvas stylesheet -->
+    <link href="~/Content/asset/lib/onoffcanvas/onoffcanvas.css" rel="stylesheet" />
+
+    <!-- animate.css stylesheet -->
+    <link href="~/Content/asset/lib/animate.css/animate.css" rel="stylesheet" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="login">
+
+    <div class="form-signin">
+        <div class="text-center">
+            <h3>Login</h3>
+        </div>
+        <hr>
+        <div class="tab-content">
+            <div id="login" class="tab-pane active">
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                {
+                    if (!string.IsNullOrEmpty(ViewBag.Message))
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Hata</strong> @ViewBag.Message
+                        </div>
+                    }
+
+                    <p class="text-muted text-center">
+                        Enter your username and password
+                    </p>
+                    if (!string.IsNullOrEmpty(ViewBag.returnURL))
+                    {
+                        @Html.Hidden("returnUrl", (object)ViewBag.returnURL);
+                    }
+                    else
+                    {
+                        @Html.Hidden("returnUrl", Request.QueryString["ReturnUrl"]);
+                    }
+                    <input type="text" placeholder="Username" class="form-control top" name="userName">
+                    <input type="password" placeholder="Password" class="form-control bottom" name="password">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="rememberMe" value="true"> Remember Me
+                        </label>
+                    </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                }
+            </div>
+            <div id="forgot" class="tab-pane">
+                <form action="index.html">
+                    <p class="text-muted text-center">Enter your valid e-mail</p>
+                    <input type="email" placeholder="mail@domain.com" class="form-control">
+                    <br>
+                    <button class="btn btn-lg btn-danger btn-block" type="submit">Recover Password</button>
+                </form>
+            </div>
+            <div id="signup" class="tab-pane">
+                <form action="index.html">
+                    <input type="text" placeholder="username" class="form-control top">
+                    <input type="email" placeholder="mail@domain.com" class="form-control middle">
+                    <input type="password" placeholder="password" class="form-control middle">
+                    <input type="password" placeholder="re-password" class="form-control bottom">
+                    <button class="btn btn-lg btn-success btn-block" type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <div class="text-center">
+            <ul class="list-inline">
+                <li><a class="text-muted" href="#login" data-toggle="tab">Login</a></li>
+                <li><a class="text-muted" href="#forgot" data-toggle="tab">Forgot Password</a></li>
+                <li><a class="text-muted" href="#signup" data-toggle="tab">Signup</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!--jQuery -->
+    <script src="~/Content/asset/lib/jquery/jquery.min.js"></script>
+
+    <!--Bootstrap -->
+    <script src="~/Content/asset/lib/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        (function ($) {
+            $(document).ready(function () {
+                $('.list-inline li > a').click(function () {
+                    var activeForm = $(this).attr('href') + ' > form';
+                    //console.log(activeForm);
+                    $(activeForm).addClass('animated fadeIn');
+                    //set timer to 1 seconds, after that, unload the animate animation
+                    setTimeout(function () {
+                        $(activeForm).removeClass('animated fadeIn');
+                    }, 1000);
+                });
+            })
+        })(jQuery);
+    </script>
+</body>
+
+</html>

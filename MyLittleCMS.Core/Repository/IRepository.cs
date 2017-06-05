@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace MyLittleCMS.Core.Repository
 {
@@ -62,5 +63,7 @@ namespace MyLittleCMS.Core.Repository
         /// </summary>
         /// <param name="entity">Entity to update.</param>
         T Update(T entity);
+
+        DbSet<T> Table();
     }
 }

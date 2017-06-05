@@ -44,6 +44,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CacheManager.Core, Version=1.0.1.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.Core.1.0.1\lib\net45\CacheManager.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CacheManager.SystemRuntimeCaching, Version=1.0.1.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.SystemRuntimeCaching.1.0.1\lib\net45\CacheManager.SystemRuntimeCaching.dll</HintPath>
+    </Reference>
+    <Reference Include="CacheManager.Web, Version=1.0.1.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.Web.1.0.1\lib\net45\CacheManager.Web.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -226,11 +235,12 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Core\AdminBaseController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Areas\Admin\Core\AdminAuthorizeAttribute.cs" />
+    <Compile Include="Areas\Admin\Models\MembershipUserViewModels.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +252,143 @@
     <Compile Include="Utilies\Helper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\countdown.css" />
+    <Content Include="Areas\Admin\Content\css\main.css" />
+    <Content Include="Areas\Admin\Content\css\main.min.css" />
+    <Content Include="Areas\Admin\Content\css\main.rtl.css" />
+    <Content Include="Areas\Admin\Content\css\main.rtl.min.css" />
+    <Content Include="Areas\Admin\Content\css\style-switcher.css" />
+    <Content Include="Areas\Admin\Content\css\style-switcher.min.css" />
+    <Content Include="Areas\Admin\Content\css\theme.css" />
+    <Content Include="Areas\Admin\Content\css\theme.min.css" />
+    <Content Include="Areas\Admin\Content\img\cp.png" />
+    <Content Include="Areas\Admin\Content\img\logo.png" />
+    <Content Include="Areas\Admin\Content\img\metis-tile.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\always_grey.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\arches.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\batthern.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\bo_play_pattern.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\brillant.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\carbon_fibre.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\cartographer.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\crissXcross.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\diagonal_striped_brick.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\diamond_upholstery.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\egg_shell.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\gplaypattern.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\greyfloral.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\irongrip.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\large_leather.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\low_contrast_linen.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\noisy_grid.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\pool_table.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\purty_wood.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\random_grey_variations.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\retina_wood.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\rip_jobs.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\white_tiles.png" />
+    <Content Include="Areas\Admin\Content\img\pattern\wood_1.png" />
+    <Content Include="Areas\Admin\Content\img\user.gif" />
+    <Content Include="Areas\Admin\Content\js\app.js" />
+    <Content Include="Areas\Admin\Content\js\app.min.js" />
+    <Content Include="Areas\Admin\Content\js\core.js" />
+    <Content Include="Areas\Admin\Content\js\core.min.js" />
+    <Content Include="Areas\Admin\Content\js\countdown.js" />
+    <Content Include="Areas\Admin\Content\js\style-switcher.js" />
+    <Content Include="Areas\Admin\Content\lib\animate.css\animate.css" />
+    <Content Include="Areas\Admin\Content\lib\animate.css\animate.min.css" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\js\bootstrap.js" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\js\npm.js" />
+    <Content Include="Areas\Admin\Content\lib\font-awesome\css\font-awesome.css" />
+    <Content Include="Areas\Admin\Content\lib\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Areas\Admin\Content\lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Admin\Content\lib\jquery\jquery.js" />
+    <Content Include="Areas\Admin\Content\lib\jquery\jquery.min.js" />
+    <Content Include="Areas\Admin\Content\lib\metismenu\metisMenu.css" />
+    <Content Include="Areas\Admin\Content\lib\metismenu\metisMenu.js" />
+    <Content Include="Areas\Admin\Content\lib\metismenu\metisMenu.min.css" />
+    <Content Include="Areas\Admin\Content\lib\metismenu\metisMenu.min.js" />
+    <Content Include="Areas\Admin\Content\lib\onoffcanvas\onoffcanvas.css" />
+    <Content Include="Areas\Admin\Content\lib\onoffcanvas\onoffcanvas.js" />
+    <Content Include="Areas\Admin\Content\lib\onoffcanvas\onoffcanvas.min.css" />
+    <Content Include="Areas\Admin\Content\lib\onoffcanvas\onoffcanvas.min.js" />
+    <Content Include="Areas\Admin\Content\lib\screenfull\screenfull.js" />
+    <Content Include="Content\asset\css\countdown.css" />
+    <Content Include="Content\asset\css\main.css" />
+    <Content Include="Content\asset\css\main.min.css" />
+    <Content Include="Content\asset\css\main.rtl.css" />
+    <Content Include="Content\asset\css\main.rtl.min.css" />
+    <Content Include="Content\asset\css\style-switcher.css" />
+    <Content Include="Content\asset\css\style-switcher.min.css" />
+    <Content Include="Content\asset\css\theme.css" />
+    <Content Include="Content\asset\css\theme.min.css" />
+    <Content Include="Content\asset\img\cp.png" />
+    <Content Include="Content\asset\img\logo.png" />
+    <Content Include="Content\asset\img\metis-tile.png" />
+    <Content Include="Content\asset\img\pattern\always_grey.png" />
+    <Content Include="Content\asset\img\pattern\arches.png" />
+    <Content Include="Content\asset\img\pattern\batthern.png" />
+    <Content Include="Content\asset\img\pattern\bo_play_pattern.png" />
+    <Content Include="Content\asset\img\pattern\brillant.png" />
+    <Content Include="Content\asset\img\pattern\carbon_fibre.png" />
+    <Content Include="Content\asset\img\pattern\cartographer.png" />
+    <Content Include="Content\asset\img\pattern\crissXcross.png" />
+    <Content Include="Content\asset\img\pattern\diagonal_striped_brick.png" />
+    <Content Include="Content\asset\img\pattern\diamond_upholstery.png" />
+    <Content Include="Content\asset\img\pattern\egg_shell.png" />
+    <Content Include="Content\asset\img\pattern\gplaypattern.png" />
+    <Content Include="Content\asset\img\pattern\greyfloral.png" />
+    <Content Include="Content\asset\img\pattern\irongrip.png" />
+    <Content Include="Content\asset\img\pattern\large_leather.png" />
+    <Content Include="Content\asset\img\pattern\low_contrast_linen.png" />
+    <Content Include="Content\asset\img\pattern\noisy_grid.png" />
+    <Content Include="Content\asset\img\pattern\pool_table.png" />
+    <Content Include="Content\asset\img\pattern\purty_wood.png" />
+    <Content Include="Content\asset\img\pattern\random_grey_variations.png" />
+    <Content Include="Content\asset\img\pattern\retina_wood.png" />
+    <Content Include="Content\asset\img\pattern\rip_jobs.png" />
+    <Content Include="Content\asset\img\pattern\white_tiles.png" />
+    <Content Include="Content\asset\img\pattern\wood_1.png" />
+    <Content Include="Content\asset\img\user.gif" />
+    <Content Include="Content\asset\js\app.js" />
+    <Content Include="Content\asset\js\app.min.js" />
+    <Content Include="Content\asset\js\core.js" />
+    <Content Include="Content\asset\js\core.min.js" />
+    <Content Include="Content\asset\js\countdown.js" />
+    <Content Include="Content\asset\js\style-switcher.js" />
+    <Content Include="Content\asset\lib\animate.css\animate.css" />
+    <Content Include="Content\asset\lib\animate.css\animate.min.css" />
+    <Content Include="Content\asset\lib\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Content\asset\lib\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Content\asset\lib\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\asset\lib\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\asset\lib\bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="Content\asset\lib\bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\asset\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\asset\lib\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\asset\lib\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\asset\lib\bootstrap\js\npm.js" />
+    <Content Include="Content\asset\lib\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\asset\lib\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\asset\lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\asset\lib\jquery\jquery.js" />
+    <Content Include="Content\asset\lib\jquery\jquery.min.js" />
+    <Content Include="Content\asset\lib\metismenu\metisMenu.css" />
+    <Content Include="Content\asset\lib\metismenu\metisMenu.js" />
+    <Content Include="Content\asset\lib\metismenu\metisMenu.min.css" />
+    <Content Include="Content\asset\lib\metismenu\metisMenu.min.js" />
+    <Content Include="Content\asset\lib\onoffcanvas\onoffcanvas.css" />
+    <Content Include="Content\asset\lib\onoffcanvas\onoffcanvas.js" />
+    <Content Include="Content\asset\lib\onoffcanvas\onoffcanvas.min.css" />
+    <Content Include="Content\asset\lib\onoffcanvas\onoffcanvas.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -254,6 +401,49 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Content\asset\img\pattern\README.md" />
+    <Content Include="Content\asset\less\theme.less" />
+    <Content Include="Content\asset\lib\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Content\asset\lib\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\asset\lib\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\asset\lib\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\asset\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\asset\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\asset\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\asset\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\asset\lib\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Content\asset\lib\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\asset\lib\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\asset\lib\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\asset\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\asset\lib\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\asset\lib\metismenu\metisMenu.js.map" />
+    <Content Include="Content\asset\lib\jquery\jquery.min.map" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\CreateUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ThemeLayout.cshtml" />
+    <Content Include="Areas\Admin\Content\img\pattern\README.md" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\Content\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\Content\lib\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Areas\Admin\Content\lib\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Admin\Content\lib\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Admin\Content\lib\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Admin\Content\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Admin\Content\lib\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Content\lib\metismenu\metisMenu.js.map" />
+    <Content Include="Areas\Admin\Content\less\theme.less" />
+    <Content Include="Areas\Admin\Content\lib\jquery\jquery.min.map" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -266,7 +456,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -280,33 +472,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\AdminBase\" />
-    <Folder Include="Areas\Admin\Views\Dashboard\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

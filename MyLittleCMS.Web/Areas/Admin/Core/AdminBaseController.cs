@@ -1,4 +1,5 @@
-﻿using MyLittleCMS.Data.Context;
+﻿using CacheManager.Core;
+using MyLittleCMS.Data.Context;
 using MyLittleCMS.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,21 @@ namespace MyLittleCMS.Web.Areas.Admin.Core
     public class AdminBaseController : Controller
     {
         // GET: Admin/AdminBase
+        protected ICacheManager<object> _cmsCache { get; set; }
 
-        //protected readonly EFContext _context;
-        //protected readonly EFUnitOfWork _unitOfWork;
-        //public AdminBaseController(EFContext context, EFUnitOfWork unitOfWork)
-        //{
-        //    _context = context;
-        //    _unitOfWork = unitOfWork;
-        //}
+        public AdminBaseController(ICacheManager<object> cmsCache)
+        {
+            _cmsCache = cmsCache;
+            
+        }
+        public string  CurrentUserName
+        {
+           get { return System.Web.HttpContext.Current.User.Identity.Name; }
+           set { }
+        }
+
+
+
+        
     }
 }

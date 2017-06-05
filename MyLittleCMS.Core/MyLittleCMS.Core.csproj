@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -48,17 +54,22 @@
     <Compile Include="Domain\Entities\MembershipUserRole.cs" />
     <Compile Include="Domain\Entities\MembershipUser.cs" />
     <Compile Include="Domain\Entities\Page.cs" />
+    <Compile Include="Domain\Entities\Permission.cs" />
     <Compile Include="Domain\Entities\Post.cs" />
     <Compile Include="Domain\Entities\PostCategory.cs" />
     <Compile Include="Domain\Entities\PostTag.cs" />
+    <Compile Include="Domain\Entities\RolePermission.cs" />
     <Compile Include="Domain\Entities\Setting.cs" />
     <Compile Include="Domain\Entities\Tag.cs" />
+    <Compile Include="General\PageList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Utilities\Helper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

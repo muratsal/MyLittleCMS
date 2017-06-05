@@ -1,0 +1,161 @@
+﻿@model MyLittleCMS.Web.Areas.Admin.Model.MembershipEditViewModel
+@{
+    ViewBag.Title = "CreateUser";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box dark">
+            <header>
+                <div class="icons"><i class="fa fa-edit"></i></div>
+                <h5>Create New User</h5>
+                <!-- .toolbar -->
+                <div class="toolbar">
+                    <nav style="padding: 8px;">
+                        <a href="javascript:;" class="btn btn-default btn-xs collapse-box">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-xs full-box">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                        <a href="javascript:;" class="btn btn-danger btn-xs close-box">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </nav>
+                </div>            <!-- /.toolbar -->
+            </header>
+            <div id="div-1" class="body collapse in" aria-expanded="true">
+
+                @using (Html.BeginForm("CreateUser", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.UserName, new { @class = "control-label col-lg-3" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.UserName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Password, new { @class = "control-label col-lg-3" })
+                        <div class="col-lg-8">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+                            @Html.ValidationMessageFor(x => x.Password)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.PasswordAgain, new { @class = "control-label col-lg-3" })
+                        <div class="col-lg-8">
+                            @Html.PasswordFor(model => model.PasswordAgain, new { @class = "form-control", placeholder = "Password" })
+                            @Html.ValidationMessageFor(x => x.PasswordAgain)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Email, new { @class = "control-label col-lg-3" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Email)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Roles, new { @class = "control-label col-lg-3" })
+                        <div class="col-lg-8">
+                        @Html.DropDownList("UserRole", new SelectList(Model.Roles.OrderBy(x => x.Id).Select(x => new SelectListItem
+                       {
+                           Value = x.Id.ToString(),
+                           Text = x.RoleName.ToString()
+                       }), "Value", "Text"),"Select Role", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-actions no-margin-bottom">
+                        <input type="submit" title="Save"  class="btn btn-primary">
+                    </div>
+                }
+
+                @*<form class="form-horizontal">
+
+                        <div class="form-group">
+                            <label for="text1" class="control-label col-lg-4">Normal Input Field</label>
+
+                            <div class="col-lg-8">
+                                @Html.TextBoxFor(m => m.StudentName, new { @class = "form-control" })
+
+                                <input type="text" id="text1" placeholder="Email" class="form-control">
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label for="pass1" class="control-label col-lg-4">Password Field</label>
+
+                            <div class="col-lg-8">
+                                <input class="form-control" type="password" id="pass1" data-original-title="Please use your secure password" data-placement="top">
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-4">Read only input</label>
+
+                            <div class="col-lg-8">
+                                <input type="text" value="read only" readonly="" class="form-control">
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-4">Disabled input</label>
+
+                            <div class="col-lg-8">
+                                <input type="text" value="disabled" disabled="" class="form-control">
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label for="text2" class="control-label col-lg-4">With Placeholder</label>
+
+                            <div class="col-lg-8">
+                                <input type="text" id="text2" placeholder="placeholder text" class="form-control">
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label for="limiter" class="control-label col-lg-4">Input limiter</label>
+
+                            <div class="col-lg-8">
+                                <textarea id="limiter" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="form-group">
+                            <label for="text4" class="control-label col-lg-4">Default Textarea</label>
+
+                            <div class="col-lg-8">
+                                <textarea id="text4" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label for="autosize" class="control-label col-lg-4">Textarea With Autosize</label>
+
+                            <div class="col-lg-8">
+                                <textarea id="autosize" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label for="tags" class="control-label col-lg-4">Tags</label>
+
+                            <div class="col-lg-8">
+                                <input name="tags" id="tags" value="foo,bar,baz" class="form-control">
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+                    </form>*@
+            </div>
+        </div>
+    </div>
+</div>

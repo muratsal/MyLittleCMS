@@ -56,9 +56,11 @@
     <Compile Include="Mapping\MembershipUserMapping.cs" />
     <Compile Include="Mapping\MembershipUserRoleMapping.cs" />
     <Compile Include="Mapping\PageMapping.cs" />
+    <Compile Include="Mapping\PermissionMapping.cs" />
     <Compile Include="Mapping\PostCategoryMapping.cs" />
     <Compile Include="Mapping\PostMapping.cs" />
     <Compile Include="Mapping\PostTagMapping.cs" />
+    <Compile Include="Mapping\RolePermissionMapping.cs" />
     <Compile Include="Mapping\TagMapping.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

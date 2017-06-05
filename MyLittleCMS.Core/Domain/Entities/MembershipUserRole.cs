@@ -14,8 +14,9 @@ namespace MyLittleCMS.Core.Domain.Entities
         }
         public int Id { get; set; }
         public string RoleName { get; set; }
-        public ICollection<MembershipUser> MembershipUsers { get; set; }
-
+        public bool IsSytemRole { get; set; }
+        public virtual ICollection<MembershipUser> MembershipUsers { get; set; }
+        public virtual ICollection<RolePermission> RolePermissions { get; set; }
 
     }
 }

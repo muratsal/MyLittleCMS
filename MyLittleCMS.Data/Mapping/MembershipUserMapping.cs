@@ -21,6 +21,7 @@ namespace MyLittleCMS.Data.Mapping
             Property(x => x.PasswordHashed).IsRequired().HasMaxLength(150);
             Property(x => x.Email).IsRequired().HasMaxLength(75).HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("IX_MembershipUser_Email", 1) { IsUnique = true })); ; ;
             Property(x => x.IsApproved).IsRequired();
+            Property(x => x.IsDeleted).IsRequired();
 
             this.HasRequired(x => x.MembershipUserRole)
                  .WithMany(x => x.MembershipUsers)

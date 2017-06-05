@@ -6,6 +6,7 @@ using System;
 using MyLittleCMS.Data.Context;
 using MyLittleCMS.Core.Repository;
 using MyLittleCMS.Data.Repositories;
+using CacheManager.Core;
 
 namespace MyLittleCMS.Web
 {
@@ -28,7 +29,23 @@ namespace MyLittleCMS.Web
         {
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
-         
+
+            var cacheConfig = ConfigurationBuilder.BuildConfiguration(settings =>
+            {
+                settings
+                    .WithSystemRuntimeCacheHandle("inprocess");
+
+            });
+
+
+            container.RegisterType(
+                typeof(ICacheManager<>),
+                new ContainerControlledLifetimeManager(),
+                new InjectionFactory(
+                    (c, t, n) => CacheFactory.FromConfiguration(
+                        t.GetGenericArguments()[0], cacheConfig)));
+
+
             container.RegisterType<IEFContext, EFContext>(new  PerRequestLifetimeManager());
             container.RegisterType<IUnitOfWork, EFUnitOfWork>();
             container.RegisterType(typeof(IRepository<>), typeof(EFRepository<>));
