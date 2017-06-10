@@ -1,7 +1,59 @@
-﻿
+﻿@model MyLittleCMS.Web.Areas.Admin.Model.MembershipUserListViewModel
+@using X.PagedList.Mvc;
+@using X.PagedList;
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
+<div class="row">
+    <!-- .col-lg-12 -->
+    <div class="col-lg-12 ui-sortable">
+        <div class="box ui-sortable-handle" style="position: relative; left: 0px; top: 0px;">
+            <header>
+                <h5>Kullanıcılar</h5>
+                <div class="toolbar">
+                    <div class="btn-group">
+                        @Html.ActionLink("Create User", "CreateUser",new { controller="User"} , new { @class = "btn btn-primary btn-sm " })
+                    </div>
+                </div>
+            </header>
+            <div id="borderedTable" class="body collapse in">
+                <table class="table table-bordered responsive-table">
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Is Approved?</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var membershipUser in Model.MembershipList)
+                        {
+                            <tr>
+                                <td>@membershipUser.UserName</td>
+                                <td>@membershipUser.Email</td>
+                                <td>
+                                    @if (membershipUser.IsApproved)
+                                    { <i class="fa fa-check" aria-hidden="true"></i>
+                                    }
+                                    else
+                                    {
+                                    <i class="fa fa-remove" aria-hidden="true"></i>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "User", new { id = membershipUser.Id }, new { @class = "btn btn-primary btn-xs btn-grad" })
+                                    @Html.ActionLink("Delete", "Delete", "User", new { id = membershipUser.Id }, new { @class = "btn btn-danger btn-xs btn-grad" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
