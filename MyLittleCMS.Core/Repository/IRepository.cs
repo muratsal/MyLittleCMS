@@ -11,12 +11,12 @@ namespace MyLittleCMS.Core.Repository
     public interface IRepository<T> where T : class
     {
         T Get(int id);
-        IEnumerable<T> Get();
+        IQueryable<T> Get();
         T First(Expression<Func<T, bool>> where);
-        IEnumerable<T> Where(Expression<Func<T, bool>> where);
+        IQueryable<T> Where(Expression<Func<T, bool>> where);
         T Add(T entity);
         void Delete(T entity);
-        void Delete(IEnumerable<T> entities);
+        void Delete(IQueryable<T> entities);
         void Delete(int id);
         T Update(T entity);
         //todo include işlemi için şimdilik böyle repository patterne uygulanacak

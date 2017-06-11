@@ -50,8 +50,7 @@
                         }
                     </tbody>
                 </table>
-                @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                @Html.PagedListPager(Model.MembershipList, page => Url.Action("Index",new { page, sortOrder ="UserName", currentFilter ="userName" }))
             </div>
         </div>
     </div>

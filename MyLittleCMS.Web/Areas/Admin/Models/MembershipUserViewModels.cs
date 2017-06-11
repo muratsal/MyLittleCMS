@@ -25,9 +25,7 @@ namespace MyLittleCMS.Web.Areas.Admin.Model
 
     public class MembershipUserListViewModel
     {
-        public IList<MembershipUser> MembershipList { get; set; }
+        public X.PagedList.IPagedList<MembershipUser> MembershipList { get; set; }
         public string Search { get; set; }
-        public int? PageIndex { get; set; }
-        public int? PageSize  { get; set; }
     }
 }

@@ -9,6 +9,8 @@ using MyLittleCMS.Services;
 using MyLittleCMS.Core.General;
 using MyLittleCMS.Core.Domain.Entities;
 using MyLittleCMS.Core.Constants;
+using X.PagedList;
+using X.PagedList.Mvc;
 
 namespace MyLittleCMS.Web.Areas.Admin.Controllers
 {
@@ -26,12 +28,12 @@ namespace MyLittleCMS.Web.Areas.Admin.Controllers
         {
             if (pageIndex == null) pageIndex = 1;
             if (pageSize == null) pageSize = AppConstants.Instance.DefaultPageSize;
-            IPagedList<MembershipUser>  users =   _membershipService.GetUsers(pageIndex.Value, pageSize.Value);
+            X.PagedList.IPagedList<MembershipUser>  users =   _membershipService.GetUsers(pageIndex.Value, pageSize.Value);
             MembershipUserListViewModel userListVM = new MembershipUserListViewModel();
-            userListVM.PageIndex = users.PageIndex;
-            userListVM.PageSize = users.PageSize;
-            userListVM.Search = search;
-            userListVM.MembershipList = users.ToList();
+            //userListVM.PageIndex = users.PageIndex;
+            //userListVM.PageSize = users.PageSize;
+            //userListVM.Search = search;
+            //userListVM.MembershipList = users.ToList();
             return View(userListVM);
         }
         [AdminAuthorize(ACLKey = "User.Edit")]

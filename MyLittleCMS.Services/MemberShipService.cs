@@ -10,13 +10,14 @@ using MyLittleCMS.Core.Repository;
 using MyLittleCMS.Core.Utilies;
 using System.Data.Entity;
 using MyLittleCMS.Core.General;
+using X.PagedList;
 
 namespace MyLittleCMS.Services
 {
     public partial interface IMembershipService
     {
         MembershipUser GetUser(int Id);
-        IPagedList<MembershipUser> GetUsers(int pageIndex, int pageSize);
+        X.PagedList.IPagedList<MembershipUser> GetUsers(int pageIndex, int pageSize);
         MembershipUser AddUser(MembershipUser user);
         void DeleteUser(MembershipUser user);
         UserValidationResult IsUserValid(string userName, string password);
@@ -45,11 +46,11 @@ namespace MyLittleCMS.Services
             _membershipUserRepository = membershipUserRepository;
             _membershipUserRoleRepository = membershipUserRoleRepository;
         }
-        public IPagedList<MembershipUser> GetUsers(int pageIndex, int pageSize)
+        public X.PagedList.IPagedList<MembershipUser> GetUsers(int pageIndex, int pageSize)
         {
             int totalCount = _membershipUserRepository.Where(x => x.IsDeleted == false).Count();
-            IList<MembershipUser> membershipUsers = _membershipUserRepository.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-            return new PagedList<MembershipUser>(membershipUsers, pageIndex, pageSize, totalCount);
+            X.PagedList.IPagedList<MembershipUser> membershipUsers = _membershipUserRepository.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id).ToPagedList(pageIndex, pageSize);
+            return membershipUsers;
         }
         public MembershipUser AddUser(MembershipUser user)
         {

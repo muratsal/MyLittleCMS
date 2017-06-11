@@ -29,9 +29,9 @@ namespace MyLittleCMS.Data.Repositories
             return _table.Find(id);
         }
 
-        public IEnumerable<T> Get()
+        public IQueryable<T> Get()
         {
-            return _table.AsEnumerable();
+            return _table.AsQueryable();
         }
 
 
@@ -58,7 +58,7 @@ namespace MyLittleCMS.Data.Repositories
             return _table.FirstOrDefault(where);
         }
 
-        public IEnumerable<T> Where(Expression<Func<T, bool>> where)
+        public IQueryable<T> Where(Expression<Func<T, bool>> where)
         {
             return _table.Where<T>(where);
         }
@@ -69,7 +69,7 @@ namespace MyLittleCMS.Data.Repositories
             Delete(entity);
         }
 
-        public void Delete(IEnumerable<T> entities)
+        public void Delete(IQueryable<T> entities)
         {
             foreach (T entity in entities)
             {
