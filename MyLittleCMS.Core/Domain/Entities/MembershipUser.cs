@@ -22,5 +22,6 @@ namespace MyLittleCMS.Core.Domain.Entities
 
         public virtual MembershipUserRole MembershipUserRole { get; set; }
         public virtual ICollection<Post> UserPosts { get; set; }
+        public virtual ICollection<Log> UseLogs { get; set; }
     }
 }

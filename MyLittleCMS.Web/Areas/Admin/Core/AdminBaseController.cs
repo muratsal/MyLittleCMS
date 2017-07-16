@@ -1,4 +1,5 @@
 ﻿using CacheManager.Core;
+using MyLittleCMS.Core.Repository;
 using MyLittleCMS.Data.Context;
 using MyLittleCMS.Data.Repositories;
 using System;
@@ -12,12 +13,13 @@ namespace MyLittleCMS.Web.Areas.Admin.Core
     public class AdminBaseController : Controller
     {
         // GET: Admin/AdminBase
-        protected ICacheManager<object> _cmsCache { get; set; }
+        protected ICacheManager<object> CmsCache { get; set; }
+        protected readonly IUnitOfWork UnitOfWork;
 
-        public AdminBaseController(ICacheManager<object> cmsCache)
+        public AdminBaseController(ICacheManager<object> cmsCache,IUnitOfWork unitOfWork)
         {
-            _cmsCache = cmsCache;
-            
+            CmsCache = cmsCache;
+            UnitOfWork = unitOfWork;
         }
         public string  CurrentUserName
         {

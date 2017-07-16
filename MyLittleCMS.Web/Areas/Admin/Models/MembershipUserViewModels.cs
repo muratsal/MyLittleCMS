@@ -22,10 +22,25 @@ namespace MyLittleCMS.Web.Areas.Admin.Model
         public IList<MembershipUserRole> Roles { get; set; }
         public int? UserRole { get; set; }
     }
-
+    public class MembershipUpdateViewModel
+    {
+        public int? Id { get; set; }
+        [Required]
+        [Display(Name = "User Name")]
+        [StringLength(50)]
+        public string UserName { get; set; }
+        [Display(Name = "Email Address")]
+        [EmailAddress]
+        public string Email { get; set; }
+        public bool IsApproved { get; set; }
+        public IList<MembershipUserRole> Roles { get; set; }
+        public int? UserRole { get; set; }
+    }
     public class MembershipUserListViewModel
     {
         public X.PagedList.IPagedList<MembershipUser> MembershipList { get; set; }
         public string Search { get; set; }
+        public string OrderBy { get; set; }
     }
+
 }

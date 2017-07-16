@@ -53,6 +53,7 @@
     <Compile Include="Domain\Entities\Category.cs" />
     <Compile Include="Domain\Entities\Comment.cs" />
     <Compile Include="Domain\Entities\Entity.cs" />
+    <Compile Include="Domain\Entities\Log.cs" />
     <Compile Include="Domain\Entities\MailSetting.cs" />
     <Compile Include="Domain\Entities\MembershipUserRole.cs" />
     <Compile Include="Domain\Entities\MembershipUser.cs" />
@@ -64,15 +65,18 @@
     <Compile Include="Domain\Entities\RolePermission.cs" />
     <Compile Include="Domain\Entities\Setting.cs" />
     <Compile Include="Domain\Entities\Tag.cs" />
-    <Compile Include="General\PageList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
     <Compile Include="Utilities\Helper.cs" />
+    <Compile Include="Utilities\WebHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="General\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

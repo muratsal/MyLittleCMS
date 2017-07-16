@@ -4,25 +4,42 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<style>
+    .cms-filter-form {
+        padding-bottom: 10px;
+    }
+</style>
 <div class="row">
     <!-- .col-lg-12 -->
     <div class="col-lg-12 ui-sortable">
         <div class="box ui-sortable-handle" style="position: relative; left: 0px; top: 0px;">
             <header>
+                <div class="icons"><i class="fa fa-list"></i></div>
                 <h5>Kullanıcılar</h5>
                 <div class="toolbar">
                     <div class="btn-group">
-                        @Html.ActionLink("Create User", "CreateUser",new { controller="User"} , new { @class = "btn btn-primary btn-sm " })
+                        @Html.ActionLink("Create User", "CreateUser", new { controller = "User" }, new { @class = "btn btn-primary btn-sm " })
                     </div>
                 </div>
             </header>
+
             <div id="borderedTable" class="body collapse in">
+                @if (TempData["Success"] != null)
+                {
+                    <p class="alert alert-success alert-dismissable" id="successMessage">@TempData["Success"]</p>
+                }
+                @using (Html.BeginForm("Index", "User", FormMethod.Get, new { @class = "form-inline cms-filter-form" }))
+                {
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="search" value="@Model.Search" name="search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Ara</button>
+                }
                 <table class="table table-bordered responsive-table">
                     <thead>
                         <tr>
-                            <th>User Name</th>
-                            <th>Email</th>
+                            <th>@Html.ActionLink("User Name", "Index", new { orderby = "UserName", search = Model.Search })</th>
+                            <th>@Html.ActionLink("Email", "Index", new { orderby = "Email", search = Model.Search })</th>
                             <th>Is Approved?</th>
                             <th>Action</th>
                         </tr>
@@ -39,18 +56,18 @@
                                     }
                                     else
                                     {
-                                    <i class="fa fa-remove" aria-hidden="true"></i>
+                                        <i class="fa fa-remove" aria-hidden="true"></i>
                                     }
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", "User", new { id = membershipUser.Id }, new { @class = "btn btn-primary btn-xs btn-grad" })
-                                    @Html.ActionLink("Delete", "Delete", "User", new { id = membershipUser.Id }, new { @class = "btn btn-danger btn-xs btn-grad" })
+                                    @Html.ActionLink("Edit", "EditUser", "User", new { id = membershipUser.Id }, new { @class = "btn btn-primary btn-xs btn-grad" })
+                                    @Html.ActionLink("Delete", "DeleteUser", "User", new { id = membershipUser.Id }, new { @class = "btn btn-danger btn-xs btn-grad" })
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-                @Html.PagedListPager(Model.MembershipList, page => Url.Action("Index",new { page, sortOrder ="UserName", currentFilter ="userName" }))
+                @Html.PagedListPager(Model.MembershipList, pageIndex => Url.Action("Index", new { pageIndex, orderby = Model.OrderBy, search = Model.Search }))
             </div>
         </div>
     </div>

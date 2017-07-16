@@ -450,6 +450,8 @@
     <Content Include="Areas\Admin\Content\less\theme.less" />
     <Content Include="Areas\Admin\Content\lib\jquery\jquery.min.map" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\EditUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\DeleteUser.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

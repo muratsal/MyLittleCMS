@@ -52,6 +52,7 @@
     <Compile Include="Context\EFContext.cs" />
     <Compile Include="Mapping\CategoryMapping.cs" />
     <Compile Include="Mapping\CommentMapping.cs" />
+    <Compile Include="Mapping\LogMapping.cs" />
     <Compile Include="Mapping\MailSettingMapping.cs" />
     <Compile Include="Mapping\MembershipUserMapping.cs" />
     <Compile Include="Mapping\MembershipUserRoleMapping.cs" />

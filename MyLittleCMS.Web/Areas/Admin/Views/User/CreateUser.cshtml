@@ -6,22 +6,8 @@
     <div class="col-lg-12">
         <div class="box dark">
             <header>
-                <div class="icons"><i class="fa fa-edit"></i></div>
+                <div class="icons"><i class="fa fa-plus-square-o"></i></div>
                 <h5>Create New User</h5>
-                <!-- .toolbar -->
-                <div class="toolbar">
-                    <nav style="padding: 8px;">
-                        <a href="javascript:;" class="btn btn-default btn-xs collapse-box">
-                            <i class="fa fa-minus"></i>
-                        </a>
-                        <a href="javascript:;" class="btn btn-default btn-xs full-box">
-                            <i class="fa fa-expand"></i>
-                        </a>
-                        <a href="javascript:;" class="btn btn-danger btn-xs close-box">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </nav>
-                </div>            <!-- /.toolbar -->
             </header>
             <div id="div-1" class="body collapse in" aria-expanded="true">
 
@@ -30,7 +16,7 @@
                     <div class="form-group">
                         @Html.LabelFor(x => x.UserName, new { @class = "control-label col-lg-3" })
                         <div class="col-lg-8">
-                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "User Name" })
                             @Html.ValidationMessageFor(x => x.UserName)
                         </div>
                     </div>
@@ -51,7 +37,7 @@
                     <div class="form-group">
                         @Html.LabelFor(x => x.Email, new { @class = "control-label col-lg-3" })
                         <div class="col-lg-8">
-                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })
                             @Html.ValidationMessageFor(x => x.Email)
                         </div>
                     </div>
@@ -65,9 +51,13 @@
                        }), "Value", "Text"),"Select Role", new { @class = "form-control" })
                         </div>
                     </div>
-                    <div class="form-actions no-margin-bottom">
-                        <input type="submit" title="Save"  class="btn btn-primary">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" title="Save" class="btn btn-primary"> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
                     </div>
+                   
                 }
             </div>
         </div>

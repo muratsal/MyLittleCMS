@@ -20,6 +20,6 @@ namespace MyLittleCMS.Core.Repository
         void Delete(int id);
         T Update(T entity);
         //todo include işlemi için şimdilik böyle repository patterne uygulanacak
-        DbSet<T> Table();
+        IQueryable<T> Table();
     }
 }

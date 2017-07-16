@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyLittleCMS.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ namespace MyLittleCMS.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        private readonly LogService _logService;
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -17,5 +19,12 @@ namespace MyLittleCMS.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+             Exception exception = Server.GetLastError();
+            _logService.Error(exception);
+        }
+
     }
 }

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using MyLittleCMS.Core.Repository;
 using MyLittleCMS.Core.Utilies;
 using System.Data.Entity;
-using MyLittleCMS.Core.General;
 using X.PagedList;
 
 namespace MyLittleCMS.Services
@@ -17,12 +16,14 @@ namespace MyLittleCMS.Services
     public partial interface IMembershipService
     {
         MembershipUser GetUser(int Id);
-        X.PagedList.IPagedList<MembershipUser> GetUsers(int pageIndex, int pageSize);
+        X.PagedList.IPagedList<MembershipUser> GetUsers(int pageIndex, int pageSize,string search, string orderByField);
         MembershipUser AddUser(MembershipUser user);
         void DeleteUser(MembershipUser user);
         UserValidationResult IsUserValid(string userName, string password);
         List<string> GetUserRolePermissions(string userName);
         List<MembershipUserRole> GetAllRoles();
+        MembershipUser GetUserByName(string userName);
+        MembershipUser GetUserByEmail(string email);
 
     }
     public enum UserValidationResult
@@ -46,11 +47,30 @@ namespace MyLittleCMS.Services
             _membershipUserRepository = membershipUserRepository;
             _membershipUserRoleRepository = membershipUserRoleRepository;
         }
-        public X.PagedList.IPagedList<MembershipUser> GetUsers(int pageIndex, int pageSize)
+        public X.PagedList.IPagedList<MembershipUser> GetUsers(int pageIndex, int pageSize,string search , string orderByField)
         {
-            int totalCount = _membershipUserRepository.Where(x => x.IsDeleted == false).Count();
-            X.PagedList.IPagedList<MembershipUser> membershipUsers = _membershipUserRepository.Where(x => x.IsDeleted == false).OrderByDescending(x => x.Id).ToPagedList(pageIndex, pageSize);
-            return membershipUsers;
+        
+            var membershipUsers = _membershipUserRepository.Where(x => x.IsDeleted == false);
+            if (!string.IsNullOrEmpty(search))
+            {
+                membershipUsers = membershipUsers.Where(x => x.UserName.Contains(search) || x.Email.Contains(search));
+            }
+
+            X.PagedList.IPagedList<MembershipUser> membershipUserResult=null;
+            if (!string.IsNullOrEmpty(orderByField))
+            {
+                if(orderByField=="Email")
+                    membershipUserResult = membershipUsers.OrderBy(x=>x.Email).ToPagedList(pageIndex, pageSize);
+                else if(orderByField == "UserName")
+                {
+                    membershipUserResult = membershipUsers.OrderBy(x => x.UserName).ToPagedList(pageIndex, pageSize);
+                }
+            }
+            else
+            {
+                membershipUserResult = membershipUsers.OrderBy(x => x.Id).ToPagedList(pageIndex, pageSize);
+            }
+            return membershipUserResult;
         }
         public MembershipUser AddUser(MembershipUser user)
         {
@@ -62,7 +82,7 @@ namespace MyLittleCMS.Services
 
         public void DeleteUser(MembershipUser user)
         {
-            throw new NotImplementedException();
+            user.IsDeleted = true;
         }
 
         public MembershipUser GetUser(int Id)
@@ -116,6 +136,16 @@ namespace MyLittleCMS.Services
         {
             List<MembershipUserRole> allRoles = _membershipUserRoleRepository.Get().ToList();
             return allRoles;
+        }
+
+        public MembershipUser GetUserByName(string userName)
+        {
+          return _membershipUserRepository.Where(x => x.UserName.Equals( userName, StringComparison.CurrentCultureIgnoreCase) ).FirstOrDefault();
+        }
+
+        public MembershipUser GetUserByEmail(string email)
+        {
+            return _membershipUserRepository.Where(x => x.Email == email).FirstOrDefault();
         }
     }
 }

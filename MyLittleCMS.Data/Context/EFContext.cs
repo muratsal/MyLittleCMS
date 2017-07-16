@@ -26,6 +26,7 @@ namespace MyLittleCMS.Data.Context
         public DbSet<MembershipUserRole> MembershipUserRole { get; set; }
         public DbSet<Page> Page { get; set; }
         public DbSet<Post> Post { get; set; }
+        public DbSet<Log> Log { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

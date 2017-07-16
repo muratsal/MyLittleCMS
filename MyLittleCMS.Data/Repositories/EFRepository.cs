@@ -76,7 +76,7 @@ namespace MyLittleCMS.Data.Repositories
                 _table.Remove(entity);
             }
         }
-        public  DbSet<T> Table()
+        public  IQueryable<T> Table()
         {
             return _table;
         }

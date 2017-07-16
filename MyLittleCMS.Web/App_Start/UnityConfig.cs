@@ -2,11 +2,13 @@ using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc5;
 using MyLittleCMS.Services;
+
 using System;
 using MyLittleCMS.Data.Context;
 using MyLittleCMS.Core.Repository;
 using MyLittleCMS.Data.Repositories;
 using CacheManager.Core;
+using System.Web;
 
 namespace MyLittleCMS.Web
 {
@@ -44,12 +46,15 @@ namespace MyLittleCMS.Web
                 new InjectionFactory(
                     (c, t, n) => CacheFactory.FromConfiguration(
                         t.GetGenericArguments()[0], cacheConfig)));
+      
 
 
             container.RegisterType<IEFContext, EFContext>(new  PerRequestLifetimeManager());
-            container.RegisterType<IUnitOfWork, EFUnitOfWork>();
+            container.RegisterType<IUnitOfWork, EFUnitOfWork>(new PerRequestLifetimeManager());
             container.RegisterType(typeof(IRepository<>), typeof(EFRepository<>));
+            container.RegisterType<ILogService, LogService>();
             container.RegisterType<IMembershipService, MembershipService>();
+           
         }
 
        

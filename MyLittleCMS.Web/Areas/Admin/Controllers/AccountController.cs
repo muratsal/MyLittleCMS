@@ -1,4 +1,5 @@
 ﻿using CacheManager.Core;
+using MyLittleCMS.Core.Repository;
 using MyLittleCMS.Services;
 using MyLittleCMS.Web.Areas.Admin.Core;
 using System;
@@ -15,11 +16,11 @@ namespace MyLittleCMS.Web.Areas.Admin.Controllers
 
         private readonly IMembershipService _membershipService;
         
-        public AccountController(ICacheManager<object> cmsCache,MembershipService membershipService)
-            :base(cmsCache)
+        public AccountController(ICacheManager<object> cmsCache,MembershipService membershipService,IUnitOfWork unitOfWork)
+            :base(cmsCache,unitOfWork)
         {
             _membershipService = membershipService;
-            _cmsCache = cmsCache;
+         
 
         }
         // GET: Admin/Account
